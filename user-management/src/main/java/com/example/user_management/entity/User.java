@@ -10,11 +10,20 @@ public class User {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
     private String name;
-    private String role="User";
+    private String role;
     private String email;
     private long phoneNo;
     private String password;
+    private boolean isActive;
 
+    public User(String name,String email,long phoneNo,String password,String role,boolean isActive){
+        this.name=name;
+        this.email=email;
+        this.phoneNo=phoneNo;
+        this.password=password;
+        this.role=role;
+        this.isActive=isActive;
+    }
     public String getPassword() {
         return password;
     }
@@ -56,7 +65,7 @@ public class User {
         this.email = email;
     }
 
-    private boolean isActive=true;
+
 
     public String getName() {
         return name;

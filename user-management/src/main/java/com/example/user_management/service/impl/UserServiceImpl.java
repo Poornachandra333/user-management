@@ -21,14 +21,14 @@ public class UserServiceImpl implements UserService {
     @Override
     public UserResponseDto createUser(UserRequestDto dto) {
         // Convert DTO to Entity
-        User user = new User();
-        user.setName(dto.getName());
-        user.setEmail(dto.getEmail());
-        user.setPassword(dto.getPassword());
-        user.setPhoneNo(dto.getPhoneNo());
+        User user = new User(dto.getName(),dto.getEmail(),dto.getPhoneNo(),dto.getPassword(),"User",true);
+//        user.setName(dto.getName());
+//        user.setEmail(dto.getEmail());
+//        user.setPassword(dto.getPassword());
+//        user.setPhoneNo(dto.getPhoneNo());
         // Default values
-        user.setRole("User");
-        user.setActive(true);
+//        user.setRole("User");
+//        user.setActive(true);
 
         // Save to DB
         User savedUser = userRepository.save(user);
