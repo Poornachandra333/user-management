@@ -16,6 +16,10 @@ public class User {
     private String password;
     private boolean isActive;
 
+    User(){
+
+    }
+
     public User(String name,String email,long phoneNo,String password,String role,boolean isActive){
         this.name=name;
         this.email=email;
@@ -24,6 +28,8 @@ public class User {
         this.role=role;
         this.isActive=isActive;
     }
+
+
     public String getPassword() {
         return password;
     }

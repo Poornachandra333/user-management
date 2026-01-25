@@ -8,6 +8,9 @@ import com.example.user_management.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
+import java.util.List;
+
 @Service
 public class UserServiceImpl implements UserService {
 
@@ -34,13 +37,55 @@ public class UserServiceImpl implements UserService {
         User savedUser = userRepository.save(user);
 
         // Convert Entity to Response DTO
-        UserResponseDto response = new UserResponseDto();
-        response.setName(savedUser.getName());
-        response.setEmail(savedUser.getEmail());
-        response.setPhoneNo(savedUser.getPhoneNo());
-        response.setRole(savedUser.getRole());
-        response.setActive(savedUser.isActive());
+//        UserResponseDto response = new UserResponseDto();
+//        response.setName(savedUser.getName());
+//        response.setEmail(savedUser.getEmail());
+//        response.setPhoneNo(savedUser.getPhoneNo());
+//        response.setRole(savedUser.getRole());
+//        response.setActive(savedUser.isActive());
+//
+//        return response;
+        return setAllDetails(savedUser);
+    }
 
-        return response;
+    public UserResponseDto setAllDetails(User user){
+        UserResponseDto userResponseDto=new UserResponseDto();
+        userResponseDto.setId(user.getId());
+        userResponseDto.setActive(user.isActive());
+        userResponseDto.setEmail(user.getEmail());
+        userResponseDto.setName(user.getName());
+        userResponseDto.setRole(user.getRole());
+        userResponseDto.setPhoneNo(user.getPhoneNo());
+        return userResponseDto;
+    }
+
+    @Override
+    public List<UserResponseDto> getAllUsers(){
+        List<User>list= userRepository.findAll();
+        List<UserResponseDto> answer = new ArrayList<>();
+        for(User user:list){
+
+//            UserResponseDto userResponseDto=new UserResponseDto();
+//            userResponseDto.setActive(user.isActive());
+//            userResponseDto.setEmail(user.getEmail());
+//            userResponseDto.setName(user.getName());
+//            userResponseDto.setRole(user.getRole());
+//            userResponseDto.setPhoneNo(user.getPhoneNo());
+            answer.add(setAllDetails(user));
+        }
+        return answer;
+    }
+
+    @Override
+    public UserResponseDto updateUser(UserRequestDto dto) {
+        User user=userRepository.findById(dto.getId()).orElseThrow(()->new RuntimeException("User not found"));
+        user.setEmail(dto.getEmail());
+        user.setId(dto.getId());
+        user.setPassword(dto.getPassword());
+        user.setPhoneNo(dto.getPhoneNo());
+        user.setRole("user");
+        user.setActive(true);
+        userRepository.save(user);
+        return setAllDetails(user);
     }
 }

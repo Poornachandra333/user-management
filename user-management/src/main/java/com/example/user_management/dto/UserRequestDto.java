@@ -5,13 +5,21 @@ public class UserRequestDto {
     private String email;
     private String password;
     private long phoneNo;
-
+    private int id;
     public String getName() {
         return name;
     }
 
     public String getEmail() {
         return email;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
 
     public long getPhoneNo() {
