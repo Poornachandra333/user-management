@@ -1,6 +1,9 @@
 package com.example.user_management.dto;
 
+import jakarta.validation.constraints.NotNull;
+
 public class UserRequestDto {
+    @NotNull(message="Name can't be null")
     private String name;
     private String email;
     private String password;

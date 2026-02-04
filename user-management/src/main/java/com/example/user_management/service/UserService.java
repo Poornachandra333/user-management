@@ -13,4 +13,5 @@ public interface UserService {
     public UserResponseDto createUser(UserRequestDto dto);
     public List<UserResponseDto> getAllUsers();
     public UserResponseDto updateUser(UserRequestDto dto);
+    public String deleteUser(int id);
 }

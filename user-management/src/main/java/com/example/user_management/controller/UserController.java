@@ -4,6 +4,7 @@ import com.example.user_management.dto.UserRequestDto;
 import com.example.user_management.dto.UserResponseDto;
 import com.example.user_management.entity.User;
 import com.example.user_management.service.UserService;
+import jakarta.validation.Valid;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -18,7 +19,7 @@ public class UserController {
     }
 
     @PostMapping("/")
-    public UserResponseDto createUser(@RequestBody UserRequestDto dto){
+    public UserResponseDto createUser(@Valid @RequestBody UserRequestDto dto){
        return  userService.createUser(dto);
     }
 
@@ -30,6 +31,11 @@ public class UserController {
     @PutMapping("/updateUser")
     public UserResponseDto updateUser(@RequestBody UserRequestDto dto){
         return userService.updateUser(dto);
+    }
+
+    @DeleteMapping("/deleteUser")
+    public String deleteUser(int id){
+        return userService.deleteUser(id);
     }
 
 }
